@@ -1,2 +1,528 @@
 # The-Walking-Club
 Helping moms walk 3.1K and stay motivated 💕✨
+<!DOCTYPE html>
+<html data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<style>
+
+:root {
+  --color-brand-primary: #232425;
+  --color-brand-secondary: #0F7FFF;
+  --color-bg-page: #FFFFFF;
+  --color-bg-surface: #FAFAFA;
+  --color-bg-subtle: #F5F5F5;
+  --color-text-primary: #232425;
+  --color-text-secondary: #606366;
+  --color-text-tertiary: #909499;
+  --color-text-disabled: #C4C7CC;
+  --color-text-link: #0F7FFF;
+  --color-text-on-brand: #FFFFFF;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+  --color-border-default: #EAEAEA;
+  --color-border-strong: #D0D3D8;
+  --color-border-subtle: #F2F2F2;
+  --color-border-brand: #0F7FFF;
+  --color-border-error: #EF4444;
+  --color-border-success: #10B981;
+  --space-4: 4px; --space-8: 8px; --space-12: 12px; --space-16: 16px;
+  --space-20: 20px; --space-24: 24px; --space-32: 32px; --space-48: 48px;
+  --text-h1: 36px; --text-h2: 28px; --text-h3: 22px; --text-h4: 18px;
+  --text-body: 16px; --text-small: 14px; --text-caption: 12px;
+  --radius-4: 4px; --radius-8: 8px; --radius-12: 12px;
+  --border-width-1: 1px; --border-width-2: 2px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+
+  /* Categorical color ramps (mirror of design-tokens.css) */
+  --color-cat-blue-50:#EBF3FE;--color-cat-blue-100:#C5DDFC;--color-cat-blue-200:#92BEF8;--color-cat-blue-400:#0F7FFF;--color-cat-blue-600:#0561C5;--color-cat-blue-800:#053F7C;--color-cat-blue-900:#06294F;
+  --color-cat-green-50:#E5F8F1;--color-cat-green-100:#B7EFD8;--color-cat-green-200:#7DE0BA;--color-cat-green-400:#10B981;--color-cat-green-600:#088762;--color-cat-green-800:#045A41;--color-cat-green-900:#023A29;
+  --color-cat-amber-50:#FEF3D9;--color-cat-amber-100:#FCE0A0;--color-cat-amber-200:#FAC865;--color-cat-amber-400:#F59E0B;--color-cat-amber-600:#B16E03;--color-cat-amber-800:#6E4500;--color-cat-amber-900:#422900;
+  --color-cat-red-50:#FDE9E9;--color-cat-red-100:#F9C2C2;--color-cat-red-200:#F49595;--color-cat-red-400:#EF4444;--color-cat-red-600:#C41B1B;--color-cat-red-800:#821212;--color-cat-red-900:#520B0B;
+  --color-cat-purple-50:#F0EAFE;--color-cat-purple-100:#D5C2FB;--color-cat-purple-200:#B59AF8;--color-cat-purple-400:#8B5CF6;--color-cat-purple-600:#6431D2;--color-cat-purple-800:#441E8E;--color-cat-purple-900:#2A1259;
+  --color-cat-teal-50:#DEF7F4;--color-cat-teal-100:#A6EBE2;--color-cat-teal-200:#6BDCCD;--color-cat-teal-400:#14B8A6;--color-cat-teal-600:#0D8779;--color-cat-teal-800:#075A50;--color-cat-teal-900:#043934;
+  --color-cat-coral-50:#FEE7EB;--color-cat-coral-100:#FCC0CA;--color-cat-coral-200:#FA98A8;--color-cat-coral-400:#FB7185;--color-cat-coral-600:#D14258;--color-cat-coral-800:#8C2336;--color-cat-coral-900:#5A111F;
+  --color-cat-pink-50:#FCE4F1;--color-cat-pink-100:#F7BAD9;--color-cat-pink-200:#F18BBE;--color-cat-pink-400:#EC4899;--color-cat-pink-600:#B81F75;--color-cat-pink-800:#7B0F4D;--color-cat-pink-900:#4D0530;
+  --color-cat-gray-50:#F3F4F6;--color-cat-gray-100:#E5E7EB;--color-cat-gray-200:#CBD0D7;--color-cat-gray-400:#6B7280;--color-cat-gray-600:#4A4F58;--color-cat-gray-800:#2A2D33;--color-cat-gray-900:#16181B;
+}
+.c-blue   { fill: var(--color-cat-blue-50);   stroke: var(--color-cat-blue-600);   color: var(--color-cat-blue-800);   background-color: var(--color-cat-blue-50);   border-color: var(--color-cat-blue-600); }
+.c-green  { fill: var(--color-cat-green-50);  stroke: var(--color-cat-green-600);  color: var(--color-cat-green-800);  background-color: var(--color-cat-green-50);  border-color: var(--color-cat-green-600); }
+.c-amber  { fill: var(--color-cat-amber-50);  stroke: var(--color-cat-amber-600);  color: var(--color-cat-amber-800);  background-color: var(--color-cat-amber-50);  border-color: var(--color-cat-amber-600); }
+.c-red    { fill: var(--color-cat-red-50);    stroke: var(--color-cat-red-600);    color: var(--color-cat-red-800);    background-color: var(--color-cat-red-50);    border-color: var(--color-cat-red-600); }
+.c-purple { fill: var(--color-cat-purple-50); stroke: var(--color-cat-purple-600); color: var(--color-cat-purple-800); background-color: var(--color-cat-purple-50); border-color: var(--color-cat-purple-600); }
+.c-teal   { fill: var(--color-cat-teal-50);   stroke: var(--color-cat-teal-600);   color: var(--color-cat-teal-800);   background-color: var(--color-cat-teal-50);   border-color: var(--color-cat-teal-600); }
+.c-coral  { fill: var(--color-cat-coral-50);  stroke: var(--color-cat-coral-600);  color: var(--color-cat-coral-800);  background-color: var(--color-cat-coral-50);  border-color: var(--color-cat-coral-600); }
+.c-pink   { fill: var(--color-cat-pink-50);   stroke: var(--color-cat-pink-600);   color: var(--color-cat-pink-800);   background-color: var(--color-cat-pink-50);   border-color: var(--color-cat-pink-600); }
+.c-gray   { fill: var(--color-cat-gray-50);   stroke: var(--color-cat-gray-600);   color: var(--color-cat-gray-800);   background-color: var(--color-cat-gray-50);   border-color: var(--color-cat-gray-600); }
+.c-blue text, .c-green text, .c-amber text, .c-red text,
+.c-purple text, .c-teal text, .c-coral text, .c-pink text, .c-gray text { fill: currentColor; stroke: none; }
+@media (prefers-color-scheme: dark) {
+  :root {
+  --color-brand-primary: #E8E9EA;
+  --color-brand-secondary: #4a9eff;
+  --color-bg-page: #1A1B1C;
+  --color-bg-surface: #232425;
+  --color-bg-subtle: #2A2B2C;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8BBBF;
+  --color-text-tertiary: #868B92;
+  --color-text-disabled: #4A4C4F;
+  --color-text-link: #8bb8ff;
+  --color-text-on-brand: #1A1B1C;
+  --color-border-default: #3A3B3C;
+  --color-border-strong: #4A4C4F;
+  --color-border-subtle: #2E2F30;
+  --color-border-brand: #4a9eff;
+  --color-border-error: #f87171;
+  --color-border-success: #34d399;
+  }
+  .c-blue { fill: var(--color-cat-blue-800); stroke: var(--color-cat-blue-200); color: var(--color-cat-blue-100); background-color: var(--color-cat-blue-800); border-color: var(--color-cat-blue-200); }
+  .c-green { fill: var(--color-cat-green-800); stroke: var(--color-cat-green-200); color: var(--color-cat-green-100); background-color: var(--color-cat-green-800); border-color: var(--color-cat-green-200); }
+  .c-amber { fill: var(--color-cat-amber-800); stroke: var(--color-cat-amber-200); color: var(--color-cat-amber-100); background-color: var(--color-cat-amber-800); border-color: var(--color-cat-amber-200); }
+  .c-red { fill: var(--color-cat-red-800); stroke: var(--color-cat-red-200); color: var(--color-cat-red-100); background-color: var(--color-cat-red-800); border-color: var(--color-cat-red-200); }
+  .c-purple { fill: var(--color-cat-purple-800); stroke: var(--color-cat-purple-200); color: var(--color-cat-purple-100); background-color: var(--color-cat-purple-800); border-color: var(--color-cat-purple-200); }
+  .c-teal { fill: var(--color-cat-teal-800); stroke: var(--color-cat-teal-200); color: var(--color-cat-teal-100); background-color: var(--color-cat-teal-800); border-color: var(--color-cat-teal-200); }
+  .c-coral { fill: var(--color-cat-coral-800); stroke: var(--color-cat-coral-200); color: var(--color-cat-coral-100); background-color: var(--color-cat-coral-800); border-color: var(--color-cat-coral-200); }
+  .c-pink { fill: var(--color-cat-pink-800); stroke: var(--color-cat-pink-200); color: var(--color-cat-pink-100); background-color: var(--color-cat-pink-800); border-color: var(--color-cat-pink-200); }
+  .c-gray { fill: var(--color-cat-gray-800); stroke: var(--color-cat-gray-200); color: var(--color-cat-gray-100); background-color: var(--color-cat-gray-800); border-color: var(--color-cat-gray-200); }
+}
+html[data-theme="dark"] {
+  --color-brand-primary: #E8E9EA;
+  --color-brand-secondary: #4a9eff;
+  --color-bg-page: #1A1B1C;
+  --color-bg-surface: #232425;
+  --color-bg-subtle: #2A2B2C;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #B8BBBF;
+  --color-text-tertiary: #868B92;
+  --color-text-disabled: #4A4C4F;
+  --color-text-link: #8bb8ff;
+  --color-text-on-brand: #1A1B1C;
+  --color-border-default: #3A3B3C;
+  --color-border-strong: #4A4C4F;
+  --color-border-subtle: #2E2F30;
+  --color-border-brand: #4a9eff;
+  --color-border-error: #f87171;
+  --color-border-success: #34d399;
+}
+html[data-theme="dark"] .c-blue { fill: var(--color-cat-blue-800); stroke: var(--color-cat-blue-200); color: var(--color-cat-blue-100); background-color: var(--color-cat-blue-800); border-color: var(--color-cat-blue-200); }
+html[data-theme="dark"] .c-green { fill: var(--color-cat-green-800); stroke: var(--color-cat-green-200); color: var(--color-cat-green-100); background-color: var(--color-cat-green-800); border-color: var(--color-cat-green-200); }
+html[data-theme="dark"] .c-amber { fill: var(--color-cat-amber-800); stroke: var(--color-cat-amber-200); color: var(--color-cat-amber-100); background-color: var(--color-cat-amber-800); border-color: var(--color-cat-amber-200); }
+html[data-theme="dark"] .c-red { fill: var(--color-cat-red-800); stroke: var(--color-cat-red-200); color: var(--color-cat-red-100); background-color: var(--color-cat-red-800); border-color: var(--color-cat-red-200); }
+html[data-theme="dark"] .c-purple { fill: var(--color-cat-purple-800); stroke: var(--color-cat-purple-200); color: var(--color-cat-purple-100); background-color: var(--color-cat-purple-800); border-color: var(--color-cat-purple-200); }
+html[data-theme="dark"] .c-teal { fill: var(--color-cat-teal-800); stroke: var(--color-cat-teal-200); color: var(--color-cat-teal-100); background-color: var(--color-cat-teal-800); border-color: var(--color-cat-teal-200); }
+html[data-theme="dark"] .c-coral { fill: var(--color-cat-coral-800); stroke: var(--color-cat-coral-200); color: var(--color-cat-coral-100); background-color: var(--color-cat-coral-800); border-color: var(--color-cat-coral-200); }
+html[data-theme="dark"] .c-pink { fill: var(--color-cat-pink-800); stroke: var(--color-cat-pink-200); color: var(--color-cat-pink-100); background-color: var(--color-cat-pink-800); border-color: var(--color-cat-pink-200); }
+html[data-theme="dark"] .c-gray { fill: var(--color-cat-gray-800); stroke: var(--color-cat-gray-200); color: var(--color-cat-gray-100); background-color: var(--color-cat-gray-800); border-color: var(--color-cat-gray-200); }
+:root { color-scheme: dark; }
+html, body { margin: 0; padding: 0; background: transparent !important; box-sizing: border-box;
+             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'; }
+*, *::before, *::after { box-sizing: inherit; }
+svg, svg text, svg tspan { font-family: inherit; }
+</style>
+<script>
+function sendPrompt(text) {
+  window.parent.postMessage(
+    { type: 'genspark_visualize_send_prompt', text: String(text) }, '*'
+  );
+}
+function _reportHeight() {
+  var h = Math.max(
+    document.body ? document.body.scrollHeight : 0,
+    document.documentElement ? document.documentElement.scrollHeight : 0,
+    100
+  );
+  window.parent.postMessage({ type: 'genspark_visualize_height', height: h }, '*');
+}
+window.addEventListener('load', function() {
+  _reportHeight();
+  if (window.ResizeObserver) {
+    new ResizeObserver(_reportHeight).observe(document.body);
+  }
+});
+window.addEventListener('resize', _reportHeight);
+
+// ── PNG export (rasterize the rendered widget inside the iframe) ─────────────
+// Runs here because sandbox="allow-scripts" (no allow-same-origin) makes the
+// iframe DOM unreachable from the parent. Clone <body>, swap each <canvas>
+// (Chart.js) for a snapshot <img>, inline the document styles with dark-scheme
+// rules stripped for a deterministic light export, wrap in <svg><foreignObject>,
+// and rasterize via a data: URL (a Blob URL would taint the canvas in Chromium).
+function _gsExportFont() { return "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Inter', 'Helvetica Neue', Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji'"; }
+function _gsCollectStyles() {
+  var out = '';
+  var s = document.querySelectorAll('style');
+  for (var i = 0; i < s.length; i++) { out += (s[i].textContent || '') + '\n'; }
+  return out;
+}
+function _gsStripDarkMedia(css) {
+  var marker = '@media (prefers-color-scheme: dark)';
+  var idx = css.indexOf(marker);
+  while (idx !== -1) {
+    var brace = css.indexOf('{', idx);
+    if (brace === -1) { css = css.slice(0, idx); break; }
+    var depth = 1, j = brace + 1;
+    while (j < css.length && depth > 0) {
+      var ch = css.charAt(j);
+      if (ch === '{') depth++; else if (ch === '}') depth--;
+      j++;
+    }
+    css = css.slice(0, idx) + css.slice(j);
+    idx = css.indexOf(marker);
+  }
+  return css;
+}
+function _gsCleanup(node) {
+  var scripts = node.querySelectorAll('script');
+  for (var i = 0; i < scripts.length; i++) {
+    if (scripts[i].parentNode) scripts[i].parentNode.removeChild(scripts[i]);
+  }
+  var nameRe = /^[A-Za-z_:][A-Za-z0-9_:.-]*$/;
+  var els = node.querySelectorAll('*');
+  for (var k = 0; k < els.length; k++) {
+    var attrs = els[k].attributes;
+    for (var a = attrs.length - 1; a >= 0; a--) {
+      if (!nameRe.test(attrs[a].name)) els[k].removeAttribute(attrs[a].name);
+    }
+  }
+}
+function _gsSubstituteCanvases(live, clone) {
+  var lc = live.querySelectorAll('canvas');
+  var cc = clone.querySelectorAll('canvas');
+  for (var i = 0; i < lc.length && i < cc.length; i++) {
+    var data = lc[i].toDataURL('image/png');
+    var img = document.createElement('img');
+    img.setAttribute('src', data);
+    img.setAttribute('style', (cc[i].getAttribute('style') || '') +
+      ';width:' + lc[i].offsetWidth + 'px;height:' + lc[i].offsetHeight + 'px');
+    if (cc[i].parentNode) cc[i].parentNode.replaceChild(img, cc[i]);
+  }
+}
+function _gsPostPng(id, dataUrl, error) {
+  window.parent.postMessage(
+    { type: 'genspark_visualize_png', id: id, dataUrl: dataUrl || null, error: error || null },
+    '*'
+  );
+}
+function _gsRasterize(id, scale) {
+  try {
+    scale = scale || 2;
+    var PAD = 16;  // breathing room so content never sits flush against the edge
+    var W = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth, 1);
+    var H = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight, 1);
+    var bodyClone = document.body.cloneNode(true);
+    _gsSubstituteCanvases(document.body, bodyClone);
+    _gsCleanup(bodyClone);
+    var wrapper = document.createElement('div');
+    wrapper.setAttribute('style',
+      'font-family:' + _gsExportFont() + ';box-sizing:border-box;width:' + W + 'px');
+    while (bodyClone.firstChild) { wrapper.appendChild(bodyClone.firstChild); }
+    var inner = new XMLSerializer().serializeToString(wrapper);
+    var styleTag = '<style>' + _gsStripDarkMedia(_gsCollectStyles()) +
+      ' svg, svg text, svg tspan { font-family:' + _gsExportFont() + '; }</style>';
+    var CW = W + PAD * 2, CH = H + PAD * 2;
+    var SW = Math.round(CW * scale), SH = Math.round(CH * scale);
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + SW +
+      '" height="' + SH + '" viewBox="0 0 ' + CW + ' ' + CH + '">' +
+      '<foreignObject x="' + PAD + '" y="' + PAD + '" width="' + W + '" height="' + H + '">' +
+      '<div xmlns="http://www.w3.org/1999/xhtml">' + styleTag + inner + '</div>' +
+      '</foreignObject></svg>';
+    var img = new Image();
+    img.onload = function() {
+      try {
+        var cv = document.createElement('canvas');
+        cv.width = SW; cv.height = SH;
+        var ctx = cv.getContext('2d');
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, SW, SH);
+        ctx.drawImage(img, 0, 0);
+        _gsPostPng(id, cv.toDataURL('image/png'), null);
+      } catch (e) { _gsPostPng(id, null, 'tainted'); }
+    };
+    img.onerror = function() { _gsPostPng(id, null, 'image_error'); };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+  } catch (e) {
+    _gsPostPng(id, null,
+      (e && e.name === 'SecurityError') ? 'tainted' : String((e && e.message) || e));
+  }
+}
+window.addEventListener('message', function(ev) {
+  var d = ev.data || {};
+  if (!d || d.type !== 'genspark_visualize_request_png') return;
+  var run = function() { _gsRasterize(d.id, d.scale); };
+  if (document.fonts && document.fonts.ready && document.fonts.ready.then) {
+    document.fonts.ready.then(function() {
+      if (window.requestAnimationFrame) window.requestAnimationFrame(run);
+      else window.setTimeout(run, 0);
+    });
+  } else if (window.requestAnimationFrame) {
+    window.requestAnimationFrame(run);
+  } else {
+    window.setTimeout(run, 0);
+  }
+});
+</script>
+</head>
+<body><style>
+  .wrap{padding:var(--space-12);display:grid;gap:var(--space-12);color:var(--color-text-primary);font-size:var(--text-body)}
+  .card{background:color-mix(in srgb,var(--color-bg-surface) 90%, var(--color-brand-secondary) 10%);border:1px solid color-mix(in srgb,var(--color-border-default) 84%, var(--color-brand-secondary) 16%);border-radius:18px;padding:var(--space-16);box-shadow:var(--shadow-sm)}
+  .hero{background:linear-gradient(180deg,color-mix(in srgb,var(--color-bg-surface) 76%, var(--color-brand-secondary) 24%),color-mix(in srgb,var(--color-bg-surface) 92%, var(--color-brand-primary) 8%))}
+  .title{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--space-8);flex-wrap:wrap}
+  .title h2{margin:0;font-size:var(--text-h4);line-height:1.1}
+  .sub{font-size:var(--text-small);color:var(--color-text-secondary);margin-top:6px}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:color-mix(in srgb,var(--color-bg-page) 72%, var(--color-brand-primary) 28%);border:1px solid color-mix(in srgb,var(--color-border-default) 70%, var(--color-brand-primary) 30%);font-size:var(--text-small)}
+  .bar{margin-top:var(--space-12);height:14px;border-radius:999px;background:color-mix(in srgb,var(--color-bg-page) 84%, var(--color-brand-secondary) 16%);overflow:hidden;border:1px solid var(--color-border-subtle)}
+  .fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,color-mix(in srgb,var(--color-brand-secondary) 70%, var(--color-bg-page) 30%),color-mix(in srgb,var(--color-brand-primary) 80%, var(--color-bg-page) 20%));transition:width .25s ease}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-8);margin-top:var(--space-12)}
+  .stat{background:color-mix(in srgb,var(--color-bg-page) 88%, var(--color-brand-primary) 12%);border:1px solid var(--color-border-subtle);border-radius:14px;padding:12px}
+  .stat b{display:block;font-size:var(--text-h4);line-height:1.05}
+  .stat span{font-size:var(--text-caption);color:var(--color-text-secondary)}
+  .section-h{font-size:var(--text-body);font-weight:700;margin:0 0 var(--space-8) 0;display:flex;justify-content:space-between;align-items:center;gap:var(--space-8)}
+  .muted{font-size:var(--text-small);color:var(--color-text-secondary)}
+  .grid3{display:grid;grid-template-columns:1fr 1fr auto;gap:var(--space-8)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8)}
+  input,select,button{font:inherit}
+  input,select{width:100%;box-sizing:border-box;min-height:46px;padding:12px;border-radius:14px;border:1px solid var(--color-border-default);background:color-mix(in srgb,var(--color-bg-page) 92%, var(--color-brand-secondary) 8%);color:var(--color-text-primary)}
+  button{min-height:46px;padding:0 14px;border-radius:14px;border:none;cursor:pointer}
+  .primary{background:color-mix(in srgb,var(--color-brand-primary) 82%, var(--color-bg-page) 18%);color:var(--color-text-on-brand)}
+  .secondary{background:color-mix(in srgb,var(--color-bg-page) 90%, var(--color-brand-secondary) 10%);color:var(--color-text-primary);border:1px solid var(--color-border-default)}
+  .tiny{min-height:34px;padding:0 10px;border-radius:999px;font-size:var(--text-caption)}
+  .preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8)}
+  .preset{padding:10px 12px;border-radius:18px;background:color-mix(in srgb,var(--color-bg-page) 90%, var(--color-brand-primary) 10%);border:1px solid var(--color-border-subtle);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px}
+  .preset strong{display:block;font-size:var(--text-small)}
+  .preset small{display:block;color:var(--color-text-secondary);font-size:var(--text-caption)}
+  .patch-row{display:flex;flex-wrap:wrap;gap:var(--space-8)}
+  .patch-chip{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;background:color-mix(in srgb,var(--color-bg-page) 92%, var(--color-brand-secondary) 8%);border:1px solid var(--color-border-subtle);font-size:var(--text-small)}
+  .patch-chip button{background:transparent;border:none;min-height:auto;padding:0;color:var(--color-text-secondary)}
+  .patch{--patch-bg:color-mix(in srgb,var(--color-brand-secondary) 26%, var(--color-bg-page) 74%);--patch-edge:color-mix(in srgb,var(--color-brand-primary) 46%, var(--color-border-default) 54%);--patch-stitch:color-mix(in srgb,var(--color-text-primary) 18%, var(--color-bg-page) 82%);position:relative;width:56px;height:56px;border-radius:18px;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%, color-mix(in srgb,var(--patch-bg) 70%, var(--color-bg-page) 30%), var(--patch-bg));border:2px solid var(--patch-edge);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--patch-edge) 30%, var(--color-bg-page) 70%), var(--shadow-sm);overflow:hidden;flex:0 0 auto}
+  .patch::before{content:'';position:absolute;inset:4px;border-radius:14px;border:2px dashed var(--patch-stitch);opacity:.9}
+  .patch::after{content:'';position:absolute;left:10px;right:10px;bottom:7px;height:8px;border-radius:0 0 8px 8px;background:linear-gradient(90deg,transparent 0 12%, var(--patch-edge) 12% 18%, transparent 18% 42%, var(--patch-edge) 42% 48%, transparent 48% 72%, var(--patch-edge) 72% 78%, transparent 78% 100%);opacity:.65}
+  .patch i{font-style:normal;font-size:22px;line-height:1;transform:translateY(-4px);position:relative;z-index:1;filter:saturate(.95)}
+  .patch.sm{width:34px;height:34px;border-radius:12px}
+  .patch.sm::before{inset:3px;border-radius:9px;border-width:1.5px}
+  .patch.sm::after{left:6px;right:6px;bottom:4px;height:5px}
+  .patch.sm i{font-size:15px;transform:translateY(-2px)}
+  .t1{--patch-bg:color-mix(in srgb,var(--color-brand-secondary) 26%, var(--color-bg-page) 74%);--patch-edge:color-mix(in srgb,var(--color-brand-primary) 44%, var(--color-border-default) 56%)}
+  .t2{--patch-bg:color-mix(in srgb,var(--color-success) 22%, var(--color-bg-page) 78%);--patch-edge:color-mix(in srgb,var(--color-success) 58%, var(--color-border-default) 42%)}
+  .t3{--patch-bg:color-mix(in srgb,var(--color-warning) 22%, var(--color-bg-page) 78%);--patch-edge:color-mix(in srgb,var(--color-warning) 58%, var(--color-border-default) 42%)}
+  .t4{--patch-bg:color-mix(in srgb,var(--color-info) 24%, var(--color-bg-page) 76%);--patch-edge:color-mix(in srgb,var(--color-info) 56%, var(--color-border-default) 44%)}
+  .t5{--patch-bg:color-mix(in srgb,var(--color-brand-primary) 22%, var(--color-bg-page) 78%);--patch-edge:color-mix(in srgb,var(--color-brand-secondary) 58%, var(--color-border-default) 42%)}
+  .t6{--patch-bg:color-mix(in srgb,var(--color-error) 18%, var(--color-bg-page) 82%);--patch-edge:color-mix(in srgb,var(--color-error) 50%, var(--color-border-default) 50%)}
+  .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .dow{font-size:var(--text-caption);color:var(--color-text-secondary);text-align:center;padding:2px 0}
+  .day{min-height:56px;border-radius:14px;padding:8px 4px;text-align:center;border:1px solid var(--color-border-subtle);background:color-mix(in srgb,var(--color-bg-page) 94%, var(--color-brand-secondary) 6%);display:grid;align-content:start;gap:3px}
+  .daynum{font-size:var(--text-caption);color:var(--color-text-secondary)}
+  .daycount{font-size:var(--text-small);font-weight:700}
+  .heat0{background:color-mix(in srgb,var(--color-bg-page) 96%, var(--color-brand-secondary) 4%)}
+  .heat1{background:color-mix(in srgb,var(--color-bg-page) 82%, var(--color-brand-secondary) 18%)}
+  .heat2{background:color-mix(in srgb,var(--color-bg-page) 70%, var(--color-brand-secondary) 30%)}
+  .heat3{background:color-mix(in srgb,var(--color-bg-page) 58%, var(--color-brand-primary) 42%)}
+  .heat4{background:color-mix(in srgb,var(--color-bg-page) 48%, var(--color-brand-primary) 52%);border-color:var(--color-border-strong)}
+  .entries{display:grid;gap:var(--space-8)}
+  .entry{display:flex;justify-content:space-between;gap:var(--space-8);padding:12px;border-radius:16px;border:1px solid var(--color-border-subtle);background:color-mix(in srgb,var(--color-bg-page) 92%, var(--color-brand-primary) 8%)}
+  .entry small{display:block;color:var(--color-text-secondary)}
+  .entry-badge{display:flex;align-items:center;gap:8px}
+  .foot{display:flex;gap:var(--space-8);flex-wrap:wrap}
+  @media (max-width:360px){.grid2,.grid3,.stats,.preset-grid{grid-template-columns:1fr}.preset{grid-template-columns:auto 1fr}}
+</style>
+
+<div class="wrap">
+  <div class="card hero">
+    <div class="title">
+      <div>
+        <h2>Patch Badge Walk Tracker</h2>
+        <div class="sub">Pastel minimalist tracker with embroidered-style patch badges for your 3,100 monthly walk goal.</div>
+      </div>
+      <div id="pct" class="pill">0% complete</div>
+    </div>
+    <div class="bar"><div id="fill" class="fill"></div></div>
+    <div class="stats">
+      <div class="stat"><b id="total">0</b><span>Total walks</span></div>
+      <div class="stat"><b id="left">3100</b><span>Remaining</span></div>
+      <div class="stat"><b id="best">0</b><span>Best day</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-h"><span>Log a walk</span><span class="muted">Add patch + note</span></div>
+    <div class="grid3">
+      <input id="walkDate" type="date" />
+      <input id="walkCount" type="number" min="1" step="1" placeholder="Walk count" />
+      <button id="addWalk" class="primary">Add</button>
+    </div>
+    <div style="height:8px"></div>
+    <div class="grid2">
+      <select id="walkBadge"></select>
+      <input id="walkNote" type="text" maxlength="40" placeholder="Optional note" />
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-h"><span>Patch studio</span><span class="muted">Scout-inspired set</span></div>
+    <div class="preset-grid" id="presetGrid"></div>
+    <div style="height:12px"></div>
+    <div class="grid3">
+      <input id="badgeEmoji" type="text" maxlength="4" value="🌸" placeholder="Emoji" />
+      <input id="badgeName" type="text" maxlength="22" placeholder="Custom patch name" />
+      <button id="addBadge" class="secondary">Create</button>
+    </div>
+    <div style="height:10px"></div>
+    <div id="customPatches" class="patch-row"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-h"><span>Month view</span><span class="muted">Soft heat map</span></div>
+    <div id="calendar" class="calendar"></div>
+  </div>
+
+  <div class="card">
+    <div class="section-h"><span>Recent entries</span><span class="muted">Latest 8</span></div>
+    <div id="entries" class="entries"></div>
+    <div style="height:10px"></div>
+    <div class="foot">
+      <button id="share" class="secondary">Send summary</button>
+      <button id="reset" class="secondary">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const GOAL = 3100;
+  const tones = ['t1','t2','t3','t4','t5','t6'];
+  const presetBadges = [
+    {id:'none', emoji:'', name:'No badge', hint:'', tone:'t1'},
+    {id:'trail', emoji:'🥾', name:'Trailblazer', hint:'Outdoor walks', tone:'t3'},
+    {id:'kindness', emoji:'💗', name:'Kindness', hint:'Walk for others', tone:'t1'},
+    {id:'camp', emoji:'⛺', name:'Camp Star', hint:'Weekend outing', tone:'t2'},
+    {id:'nature', emoji:'🌿', name:'Nature Friend', hint:'Park or trail', tone:'t2'},
+    {id:'leader', emoji:'🧭', name:'Leader Steps', hint:'Lead the route', tone:'t4'},
+    {id:'helper', emoji:'🤝', name:'Community Helper', hint:'Service day', tone:'t5'},
+    {id:'starlight', emoji:'✨', name:'Starlight', hint:'Evening walk', tone:'t5'},
+    {id:'sunrise', emoji:'🌅', name:'Sunrise Scout', hint:'Morning walk', tone:'t6'},
+    {id:'strong', emoji:'💪', name:'Strong Steps', hint:'Big walk day', tone:'t4'},
+    {id:'explorer', emoji:'🗺️', name:'Explorer', hint:'New route', tone:'t3'},
+    {id:'bloom', emoji:'🌸', name:'Bloom Badge', hint:'Steady progress', tone:'t1'},
+    {id:'gold', emoji:'🏅', name:'Golden Goal', hint:'Milestone day', tone:'t3'}
+  ];
+  const state = { badges:[...presetBadges], entries:[] };
+  const el = id => document.getElementById(id);
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth()+1).padStart(2,'0');
+  const dd = String(now.getDate()).padStart(2,'0');
+  el('walkDate').value = `${yyyy}-${mm}-${dd}`;
+
+  function daysInMonth(){ return new Date(yyyy, now.getMonth()+1, 0).getDate(); }
+  function firstWeekday(){ return new Date(yyyy, now.getMonth(), 1).getDay(); }
+  function sameMonth(dateStr){ const d = new Date(dateStr+'T00:00:00'); return d.getMonth()===now.getMonth() && d.getFullYear()===yyyy; }
+  function total(){ return state.entries.reduce((s,e)=>s+e.count,0); }
+  function dayTotals(){ const sums = Array(daysInMonth()).fill(0); state.entries.forEach(e=>{ if(!sameMonth(e.date)) return; const day = new Date(e.date+'T00:00:00').getDate(); sums[day-1]+=e.count; }); return sums; }
+  function bestDay(){ return Math.max(0,...dayTotals()); }
+  function heatClass(v){ if(v===0) return 'heat0'; if(v<25) return 'heat1'; if(v<75) return 'heat2'; if(v<150) return 'heat3'; return 'heat4'; }
+  function badgeMap(){ return Object.fromEntries(state.badges.map(b=>[b.id,b])); }
+  function patchHTML(b, small=false){ return `<span class="patch ${b.tone || 't1'} ${small ? 'sm' : ''}"><i>${b.emoji || '•'}</i></span>`; }
+
+  function renderPresetGrid(){
+    const list = state.badges.filter(b=>b.id!=='none').slice(0,10);
+    el('presetGrid').innerHTML = list.map(b => `
+      <div class="preset">
+        ${patchHTML(b)}
+        <div><strong>${b.name}</strong><small>${b.hint || 'Custom patch'}</small></div>
+        <button class="secondary tiny" data-pick="${b.id}">Use</button>
+      </div>`).join('');
+    [...document.querySelectorAll('[data-pick]')].forEach(btn=>btn.onclick=()=>{ el('walkBadge').value = btn.getAttribute('data-pick'); });
+  }
+
+  function renderCustomPatches(){
+    const customs = state.badges.filter(b=>b.id.startsWith('custom-'));
+    el('customPatches').innerHTML = customs.length ? customs.map(b=>`
+      <span class="patch-chip">${patchHTML(b,true)} <span>${b.name}</span> <button data-del="${b.id}">×</button></span>
+    `).join('') : '<span class="muted">Your custom embroidered patches will appear here.</span>';
+    [...document.querySelectorAll('[data-del]')].forEach(btn=>btn.onclick=()=>{
+      const id = btn.getAttribute('data-del');
+      state.badges = state.badges.filter(b=>b.id!==id);
+      state.entries = state.entries.map(e=>e.badgeId===id ? {...e,badgeId:'none'} : e);
+      renderAll();
+    });
+  }
+
+  function renderBadgeSelect(){
+    el('walkBadge').innerHTML = state.badges.map(b=>`<option value="${b.id}">${b.emoji ? b.emoji+' ' : ''}${b.name}</option>`).join('');
+  }
+
+  function renderCalendar(){
+    const dows = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    const sums = dayTotals();
+    let html = dows.map(d=>`<div class="dow">${d}</div>`).join('');
+    for(let i=0;i<firstWeekday();i++) html += '<div></div>';
+    for(let i=1;i<=daysInMonth();i++){
+      const v = sums[i-1];
+      html += `<div class="day ${heatClass(v)}"><div class="daynum">${i}</div><div class="daycount">${v || '—'}</div></div>`;
+    }
+    el('calendar').innerHTML = html;
+  }
+
+  function renderEntries(){
+    const map = badgeMap();
+    const items = [...state.entries].sort((a,b)=>b.date.localeCompare(a.date)).slice(0,8);
+    el('entries').innerHTML = items.length ? items.map(e=>{
+      const b = map[e.badgeId] || {id:'none',emoji:'',name:'No badge',tone:'t1'};
+      return `<div class="entry"><div><strong>${e.count} walks</strong><small>${e.date}${e.note ? ' · '+e.note : ''}</small></div><div class="entry-badge">${b.id!=='none' ? patchHTML(b,true)+`<span class="muted">${b.name}</span>` : ''}</div></div>`;
+    }).join('') : '<div class="muted">No entries yet. Add your first walk.</div>';
+  }
+
+  function renderStats(){
+    const t = total();
+    const pct = Math.min(100, Math.round((t/GOAL)*100));
+    el('total').textContent = t.toLocaleString();
+    el('left').textContent = Math.max(0,GOAL-t).toLocaleString();
+    el('best').textContent = bestDay().toLocaleString();
+    el('pct').textContent = `${pct}% complete`;
+    el('fill').style.width = pct + '%';
+  }
+
+  function renderAll(){
+    renderStats(); renderBadgeSelect(); renderPresetGrid(); renderCustomPatches(); renderCalendar(); renderEntries();
+    if(window._reportHeight) _reportHeight();
+  }
+
+  el('addBadge').onclick = () => {
+    const emoji = el('badgeEmoji').value.trim() || '🌸';
+    const name = el('badgeName').value.trim();
+    if(!name) return;
+    const id = 'custom-' + name.toLowerCase().replace(/[^a-z0-9]+/g,'-') + '-' + Math.random().toString(36).slice(2,5);
+    const tone = tones[(state.badges.length + name.length) % tones.length];
+    state.badges.push({id,emoji,name,hint:'Custom patch',tone});
+    el('badgeName').value='';
+    el('walkBadge').value=id;
+    renderAll();
+  };
+
+  el('addWalk').onclick = () => {
+    const date = el('walkDate').value;
+    const count = parseInt(el('walkCount').value,10);
+    const badgeId = el('walkBadge').value || 'none';
+    const note = el('walkNote').value.trim();
+    if(!date || !count || count<1) return;
+    state.entries.push({date,count,badgeId,note});
+    el('walkCount').value='';
+    el('walkNote').value='';
+    renderAll();
+    if(total() >= GOAL){ sendPrompt(`I reached my 3,100 walk goal with ${total()} walks logged.`); }
+  };
+
+  el('share').onclick = () => {
+    const custom = state.badges.filter(b=>b.id.startsWith('custom-')).map(b=>`${b.emoji} ${b.name}`).join(', ') || 'none yet';
+    sendPrompt(`Walk tracker update: ${total()} of 3,100 complete, ${Math.max(0,GOAL-total())} remaining, best day ${bestDay()} walks. Custom patch badges: ${custom}.`);
+  };
+
+  el('reset').onclick = () => { state.badges=[...presetBadges]; state.entries=[]; renderAll(); };
+  renderAll();
+</script></body>
+</html>
