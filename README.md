@@ -1,2 +1,2 @@
 # The-Walking-Club
-Helping moms walk 3.1K and stay motivated 💕✨
+Helping moms walk a 5k and stay motivated 💕✨
