@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>The Walking Club 🌸 5K Tracker</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink:#ff6fa5;
+    --pink-deep:#ff4f8f;
+    --pink-pale:#ffe3ee;
+    --peach:#ffb6a3;
+    --lavender:#b79cee;
+    --lavender-pale:#ece2ff;
+    --mint:#7fe0c4;
+    --cream:#fff8fb;
+    --card:#ffffff;
+    --plum:#5b3a53;
+    --plum-soft:#9b7c93;
+    --line:#ffe0ec;
+    --shadow: 0 10px 30px -12px rgba(255,111,165,0.35);
+    --shadow-sm: 0 4px 14px -6px rgba(255,111,165,0.3);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Nunito',sans-serif;
+    background:
+      radial-gradient(circle at 8% 8%, #ffd9ea 0%, transparent 45%),
+      radial-gradient(circle at 95% 12%, #e3d6ff 0%, transparent 40%),
+      radial-gradient(circle at 90% 92%, #d0f5e8 0%, transparent 40%),
+      var(--cream);
+    color:var(--plum);
+    min-height:100vh;
+    padding:20px 14px 60px;
+  }
+  .wrap{max-width:640px;margin:0 auto;}
+
+  /* Header */
+  header{text-align:center;padding:18px 10px 26px;}
+  header .badge-emoji{font-size:38px;display:block;margin-bottom:4px;animation:float 3.4s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-4deg);}50%{transform:translateY(-8px) rotate(4deg);}}
+  h1{
+    font-family:'Baloo 2',cursive;
+    font-size:clamp(26px,7vw,34px);
+    margin:2px 0 4px;
+    color:var(--pink-deep);
+    letter-spacing:0.2px;
+  }
+  header p{margin:0;color:var(--plum-soft);font-weight:700;font-size:14px;}
+
+  /* Cards */
+  .card{
+    background:var(--card);
+    border-radius:26px;
+    padding:22px 20px;
+    margin-bottom:18px;
+    box-shadow:var(--shadow-sm);
+    border:1px solid var(--line);
+  }
+  .card h2{
+    font-family:'Baloo 2',cursive;
+    font-size:19px;
+    margin:0 0 14px;
+    color:var(--pink-deep);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  /* Goal + stats */
+  .goal-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:8px;}
+  .goal-title{font-family:'Baloo 2',cursive;font-size:19px;color:var(--pink-deep);}
+  .goal-edit{
+    background:var(--lavender-pale);color:var(--lavender);border:none;
+    font-family:'Nunito';font-weight:800;font-size:12px;
+    padding:6px 12px;border-radius:20px;cursor:pointer;
+  }
+  .goal-edit:hover{background:var(--lavender);color:#fff;}
+  .stats-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .stat-pill{
+    flex:1;min-width:100px;
+    background:var(--pink-pale);
+    border-radius:18px;
+    text-align:center;
+    padding:10px 6px 8px;
+  }
+  .stat-pill .num{font-family:'Baloo 2';font-size:20px;color:var(--pink-deep);display:block;}
+  .stat-pill .lbl{font-size:11px;font-weight:800;color:var(--plum-soft);text-transform:uppercase;letter-spacing:.4px;}
+
+  /* Trail */
+  .trail-box{position:relative;margin-top:10px;}
+  .trail-svg{width:100%;height:auto;display:block;overflow:visible;}
+  .walker{
+    position:absolute;
+    font-size:26px;
+    transform:translate(-50%,-58%);
+    filter:drop-shadow(0 3px 3px rgba(255,79,143,.4));
+    animation:bob 1.6s ease-in-out infinite;
+    transition:left .8s cubic-bezier(.4,1.4,.5,1), top .8s cubic-bezier(.4,1.4,.5,1);
+    pointer-events:none;
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,-58%) translateY(0);}50%{transform:translate(-50%,-58%) translateY(-5px);}}
+  .milestone-icon{
+    position:absolute;
+    width:26px;height:26px;
+    transform:translate(-50%,-50%);
+    display:flex;align-items:center;justify-content:center;
+    font-size:14px;
+    border-radius:50%;
+    background:#fff;
+    border:2px solid var(--pink-pale);
+    transition:all .4s ease;
+  }
+  .milestone-icon.done{
+    background:linear-gradient(135deg,var(--pink),var(--peach));
+    border-color:var(--pink-deep);
+    box-shadow:0 0 0 4px rgba(255,111,165,.18);
+    transform:translate(-50%,-50%) scale(1.12);
+  }
+  .progress-text{text-align:center;margin-top:14px;font-weight:800;color:var(--plum);font-size:14px;}
+  .progress-text b{color:var(--pink-deep);}
+  .lap-note{
+    text-align:center;margin-top:6px;font-size:12.5px;color:var(--plum-soft);font-weight:700;
+  }
+
+  /* Log form */
+  form.log-form{display:flex;flex-wrap:wrap;gap:10px;}
+  .field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:120px;}
+  .field label{font-size:11.5px;font-weight:800;color:var(--plum-soft);text-transform:uppercase;letter-spacing:.4px;}
+  .field input, .field select{
+    border:2px solid var(--line);
+    border-radius:14px;
+    padding:10px 12px;
+    font-family:'Nunito';font-weight:700;font-size:15px;
+    color:var(--plum);
+    background:var(--cream);
+    outline:none;
+  }
+  .field input:focus{border-color:var(--pink);}
+  .add-btn{
+    width:100%;
+    margin-top:4px;
+    background:linear-gradient(135deg,var(--pink),var(--pink-deep));
+    color:#fff;border:none;border-radius:18px;
+    font-family:'Baloo 2',cursive;font-size:16px;font-weight:700;
+    padding:12px;cursor:pointer;
+    box-shadow:var(--shadow-sm);
+    transition:transform .15s ease;
+  }
+  .add-btn:active{transform:scale(.97);}
+
+  .entries{margin-top:16px;display:flex;flex-direction:column;gap:8px;max-height:230px;overflow-y:auto;padding-right:2px;}
+  .entry{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--cream);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:9px 12px;
+    font-weight:700;font-size:13.5px;
+  }
+  .entry .e-left{display:flex;align-items:center;gap:9px;}
+  .entry .e-date{color:var(--plum-soft);font-size:12px;min-width:64px;}
+  .entry .e-miles{color:var(--pink-deep);}
+  .entry .e-note{color:var(--plum-soft);font-weight:600;font-size:12px;}
+  .del-btn{
+    background:none;border:none;color:#e29ab5;font-size:16px;cursor:pointer;
+    padding:2px 6px;border-radius:8px;line-height:1;
+  }
+  .del-btn:hover{background:var(--pink-pale);color:var(--pink-deep);}
+  .empty-msg{text-align:center;color:var(--plum-soft);font-weight:700;font-size:13px;padding:14px 0;}
+
+  /* Badges */
+  .badge-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;}
+  .badge{
+    text-align:center;
+    padding:12px 4px 10px;
+    border-radius:18px;
+    background:var(--cream);
+    border:2px solid var(--line);
+    opacity:.55;
+    filter:grayscale(70%);
+    transition:all .4s ease;
+  }
+  .badge.unlocked{
+    opacity:1;filter:none;
+    background:linear-gradient(160deg,#fff, var(--pink-pale));
+    border-color:var(--pink);
+    box-shadow:var(--shadow-sm);
+    animation:pop .5s ease;
+  }
+  @keyframes pop{0%{transform:scale(.8);}60%{transform:scale(1.08);}100%{transform:scale(1);}}
+  .badge .ic{font-size:24px;display:block;margin-bottom:4px;}
+  .badge .nm{font-size:10px;font-weight:800;color:var(--plum-soft);line-height:1.2;}
+  .badge.unlocked .nm{color:var(--pink-deep);}
+
+  /* Calendar */
+  .cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+  .cal-head .month-lbl{font-family:'Baloo 2';font-size:17px;color:var(--pink-deep);}
+  .cal-nav{
+    background:var(--pink-pale);border:none;color:var(--pink-deep);
+    width:32px;height:32px;border-radius:50%;font-size:15px;font-weight:900;cursor:pointer;
+  }
+  .cal-nav:hover{background:var(--pink);color:#fff;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
+  .cal-dow{text-align:center;font-size:10.5px;font-weight:800;color:var(--plum-soft);text-transform:uppercase;padding-bottom:2px;}
+  .cal-day{
+    aspect-ratio:1/1;
+    border-radius:12px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    font-size:12.5px;font-weight:800;color:var(--plum);
+    background:var(--cream);
+    border:2px solid transparent;
+    position:relative;
+    cursor:default;
+  }
+  .cal-day.blank{background:transparent;}
+  .cal-day.walked{background:linear-gradient(160deg,#ffe0ec,#ffd0e4);color:var(--pink-deep);}
+  .cal-day.today{border-color:var(--lavender);}
+  .cal-day .dot{position:absolute;bottom:4px;font-size:8px;}
+  .cal-day.clickable{cursor:pointer;}
+  .cal-info{
+    margin-top:12px;text-align:center;font-size:13px;font-weight:700;
+    color:var(--pink-deep);min-height:18px;
+  }
+
+  footer{text-align:center;color:var(--plum-soft);font-size:12px;font-weight:700;margin-top:8px;}
+
+  ::-webkit-scrollbar{width:6px;}
+  ::-webkit-scrollbar-thumb{background:var(--pink-pale);border-radius:6px;}
+
+  @media (max-width:380px){
+    .badge-grid{grid-template-columns:repeat(5,1fr);gap:6px;}
+    .badge .ic{font-size:19px;}
+    .badge .nm{font-size:8.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="badge-emoji">🌸</span>
+    <h1>The Walking Club</h1>
+    <p>5K Tracker · one cute step at a time</p>
+  </header>
+
+  <!-- TRAIL / PROGRESS -->
+  <section class="card">
+    <div class="goal-row">
+      <div class="goal-title">🎯 Goal: <span id="goalLabel">5K · 3.1 mi</span></div>
+      <button class="goal-edit" id="editGoalBtn">edit goal</button>
+    </div>
+
+    <div class="trail-box">
+      <svg class="trail-svg" id="trailSvg" viewBox="0 0 600 190" xmlns="http://www.w3.org/2000/svg">
+        <path id="trailBg" d="M 25 140 C 130 40, 220 220, 320 110 S 480 10, 575 90"
+              fill="none" stroke="#ffe3ee" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="1 9"/>
+        <path id="trailFg" d="M 25 140 C 130 40, 220 220, 320 110 S 480 10, 575 90"
+              fill="none" stroke="url(#trailGrad)" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="100 100" stroke-dashoffset="100"/>
+        <defs>
+          <linearGradient id="trailGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#ffb6a3"/>
+            <stop offset="100%" stop-color="#ff4f8f"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <div class="walker" id="walker">🚶‍♀️</div>
+      <div id="milestoneIcons"></div>
+    </div>
+
+    <div class="progress-text" id="progressText">0 mi walked</div>
+    <div class="lap-note" id="lapNote"></div>
+
+    <div class="stats-row">
+      <div class="stat-pill"><span class="num" id="statTotal">0</span><span class="lbl">Total mi</span></div>
+      <div class="stat-pill"><span class="num" id="statWalks">0</span><span class="lbl">Walks</span></div>
+      <div class="stat-pill"><span class="num" id="statFinishes">0</span><span class="lbl">5Ks done</span></div>
+    </div>
+  </section>
+
+  <!-- LOG A WALK -->
+  <section class="card">
+    <h2>🥾 Log a Walk</h2>
+    <form class="log-form" id="logForm">
+      <div class="field">
+        <label for="walkDate">Date</label>
+        <input type="date" id="walkDate" required>
+      </div>
+      <div class="field">
+        <label for="walkMiles">Miles</label>
+        <input type="number" id="walkMiles" step="0.01" min="0.01" placeholder="1.5" required>
+      </div>
+      <div class="field" style="flex-basis:100%;">
+        <label for="walkNote">Note (optional)</label>
+        <input type="text" id="walkNote" placeholder="Morning stroll with the dog 🐶" maxlength="40">
+      </div>
+      <button type="submit" class="add-btn">➕ Add Walk</button>
+    </form>
+
+    <div class="entries" id="entriesList"></div>
+  </section>
+
+  <!-- BADGES -->
+  <section class="card">
+    <h2>🏅 Milestone Badges</h2>
+    <div class="badge-grid" id="badgeGrid"></div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="card">
+    <div class="cal-head">
+      <button class="cal-nav" id="prevMonth">‹</button>
+      <div class="month-lbl" id="monthLabel">📅 Month</div>
+      <button class="cal-nav" id="nextMonth">›</button>
+    </div>
+    <div class="cal-grid" id="calGrid"></div>
+    <div class="cal-info" id="calInfo">Tap a day to see your walk 🌷</div>
+  </section>
+
+  <footer>Made with 💕 for The Walking Club</footer>
+</div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'walkingClubData';
+  const todayStr = () => new Date().toISOString().slice(0,10);
+
+  function loadData(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(raw) return JSON.parse(raw);
+    }catch(e){}
+    return { goal: 3.1, entries: [] };
+  }
+  function saveData(){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  let data = loadData();
+  if(!data.goal) data.goal = 3.1;
+  if(!data.entries) data.entries = [];
+
+  const MILESTONES = [
+    { frac: 0.02, icon:'🌱', name:'First Steps' },
+    { frac: 0.25, icon:'🌸', name:'Blooming' },
+    { frac: 0.50, icon:'🌺', name:'Halfway' },
+    { frac: 0.75, icon:'🦋', name:'Almost There' },
+    { frac: 1.00, icon:'🏅', name:'5K Finisher' },
+  ];
+
+  // ---------- Elements ----------
+  const goalLabel = document.getElementById('goalLabel');
+  const editGoalBtn = document.getElementById('editGoalBtn');
+  const trailFg = document.getElementById('trailFg');
+  const trailPathForMath = document.getElementById('trailBg');
+  const walker = document.getElementById('walker');
+  const milestoneIconsWrap = document.getElementById('milestoneIcons');
+  const progressText = document.getElementById('progressText');
+  const lapNote = document.getElementById('lapNote');
+  const statTotal = document.getElementById('statTotal');
+  const statWalks = document.getElementById('statWalks');
+  const statFinishes = document.getElementById('statFinishes');
+  const logForm = document.getElementById('logForm');
+  const walkDate = document.getElementById('walkDate');
+  const walkMiles = document.getElementById('walkMiles');
+  const walkNote = document.getElementById('walkNote');
+  const entriesList = document.getElementById('entriesList');
+  const badgeGrid = document.getElementById('badgeGrid');
+  const calGrid = document.getElementById('calGrid');
+  const monthLabel = document.getElementById('monthLabel');
+  const calInfo = document.getElementById('calInfo');
+  const prevMonthBtn = document.getElementById('prevMonth');
+  const nextMonthBtn = document.getElementById('nextMonth');
+
+  walkDate.value = todayStr();
+
+  // ---------- Progress math ----------
+  function computeProgress(){
+    const goal = data.goal;
+    const total = data.entries.reduce((s,e)=>s+e.miles,0);
+    const eps = 1e-9;
+    let completedLaps = total > 0 ? Math.floor((total - eps) / goal) : 0;
+    let remainder = total - completedLaps * goal;
+    if(total <= 0){ completedLaps = 0; remainder = 0; }
+    const finishedCount = completedLaps + (remainder >= goal - eps ? 1 : 0);
+    const fraction = Math.max(0, Math.min(1, remainder / goal));
+    return { goal, total, completedLaps, remainder, finishedCount, fraction };
+  }
+
+  // ---------- Trail rendering ----------
+  function renderTrail(){
+    const svg = document.getElementById('trailSvg');
+    const p = computeProgress();
+    const pct = p.fraction * 100;
+    trailFg.setAttribute('stroke-dashoffset', (100 - pct).toString());
+
+    // position walker + milestones using path geometry
+    const pathEl = trailPathForMath;
+    const totalLen = pathEl.getTotalLength();
+    const box = svg.getBoundingClientRect();
+    const vb = svg.viewBox.baseVal;
+    const scaleX = box.width / vb.width;
+    const scaleY = box.height / vb.height;
+
+    function placeAt(el, frac){
+      const pt = pathEl.getPointAtLength(totalLen * frac);
+      el.style.left = (pt.x * scaleX) + 'px';
+      el.style.top = (pt.y * scaleY) + 'px';
+    }
+
+    placeAt(walker, p.fraction);
+
+    milestoneIconsWrap.innerHTML = '';
+    MILESTONES.forEach(m=>{
+      const div = document.createElement('div');
+      div.className = 'milestone-icon' + (p.fraction >= m.frac - 1e-9 ? ' done' : '');
+      div.textContent = m.icon;
+      div.title = m.name + ' (' + (m.frac*p.goal).toFixed(2) + ' mi)';
+      milestoneIconsWrap.appendChild(div);
+      placeAt(div, m.frac);
+    });
+
+    progressText.innerHTML = '<b>' + p.remainder.toFixed(2) + '</b> / ' + p.goal.toFixed(2) + ' mi this 5K';
+    if(p.finishedCount > 0 && p.remainder >= p.goal - 1e-9){
+      lapNote.textContent = '🎉 5K complete! Log another walk to start your next one.';
+    } else if(p.total === 0){
+      lapNote.textContent = 'Log your first walk to hit the trail!';
+    } else {
+      const left = (p.goal - p.remainder);
+      lapNote.textContent = left.toFixed(2) + ' mi to go — you got this! 🌷';
+    }
+
+    statTotal.textContent = p.total.toFixed(1);
+    statWalks.textContent = data.entries.length;
+    statFinishes.textContent = p.finishedCount;
+
+    renderBadges(p);
+  }
+
+  function renderBadges(p){
+    badgeGrid.innerHTML = '';
+    MILESTONES.forEach(m=>{
+      const unlocked = p.fraction >= m.frac - 1e-9 && p.total > 0;
+      const div = document.createElement('div');
+      div.className = 'badge' + (unlocked ? ' unlocked' : '');
+      div.innerHTML = '<span class="ic">' + m.icon + '</span><span class="nm">' + m.name + '</span>';
+      badgeGrid.appendChild(div);
+    });
+  }
+
+  // ---------- Entries ----------
+  function renderEntries(){
+    const sorted = [...data.entries].sort((a,b)=> b.date.localeCompare(a.date) || b.id - a.id);
+    if(sorted.length === 0){
+      entriesList.innerHTML = '<div class="empty-msg">No walks logged yet 🌼 Add your first one above!</div>';
+      return;
+    }
+    entriesList.innerHTML = '';
+    sorted.forEach(e=>{
+      const row = document.createElement('div');
+      row.className = 'entry';
+      const dateFmt = formatDateShort(e.date);
+      row.innerHTML =
+        '<div class="e-left">' +
+          '<span class="e-date">' + dateFmt + '</span>' +
+          '<span class="e-miles">' + e.miles.toFixed(2) + ' mi</span>' +
+          (e.note ? '<span class="e-note">· ' + escapeHtml(e.note) + '</span>' : '') +
+        '</div>' +
+        '<button class="del-btn" data-id="' + e.id + '" title="Delete">✕</button>';
+      entriesList.appendChild(row);
+    });
+    entriesList.querySelectorAll('.del-btn').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const id = Number(btn.getAttribute('data-id'));
+        data.entries = data.entries.filter(e=>e.id !== id);
+        saveData();
+        renderAll();
+      });
+    });
+  }
+
+  function formatDateShort(iso){
+    const [y,m,d] = iso.split('-').map(Number);
+    const dt = new Date(y, m-1, d);
+    return dt.toLocaleDateString(undefined,{month:'short', day:'numeric'});
+  }
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+
+  logForm.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    const miles = parseFloat(walkMiles.value);
+    if(!walkDate.value || isNaN(miles) || miles <= 0) return;
+    data.entries.push({
+      id: Date.now(),
+      date: walkDate.value,
+      miles: Math.round(miles*100)/100,
+      note: walkNote.value.trim().slice(0,40)
+    });
+    saveData();
+    walkMiles.value = '';
+    walkNote.value = '';
+    renderAll();
+  });
+
+  // ---------- Goal editing ----------
+  editGoalBtn.addEventListener('click', function(){
+    const val = prompt('Set your goal distance in miles (default 5K = 3.1):', data.goal);
+    if(val === null) return;
+    const num = parseFloat(val);
+    if(!isNaN(num) && num > 0){
+      data.goal = Math.round(num*100)/100;
+      saveData();
+      renderAll();
+    }
+  });
+  function renderGoalLabel(){
+    goalLabel.textContent = data.goal.toFixed(1) + ' mi goal';
+  }
+
+  // ---------- Calendar ----------
+  let viewYear, viewMonth;
+  (function initCalDate(){
+    const t = new Date();
+    viewYear = t.getFullYear();
+    viewMonth = t.getMonth();
+  })();
+
+  function entriesByDate(){
+    const map = {};
+    data.entries.forEach(e=>{
+      if(!map[e.date]) map[e.date] = [];
+      map[e.date].push(e);
+    });
+    return map;
+  }
+
+  function renderCalendar(){
+    const map = entriesByDate();
+    const first = new Date(viewYear, viewMonth, 1);
+    const startDow = first.getDay();
+    const daysInMonth = new Date(viewYear, viewMonth+1, 0).getDate();
+    const monthName = first.toLocaleDateString(undefined,{month:'long', year:'numeric'});
+    monthLabel.textContent = '📅 ' + monthName;
+
+    calGrid.innerHTML = '';
+    ['S','M','T','W','T','F','S'].forEach(d=>{
+      const el = document.createElement('div');
+      el.className = 'cal-dow';
+      el.textContent = d;
+      calGrid.appendChild(el);
+    });
+
+    for(let i=0;i<startDow;i++){
+      const blank = document.createElement('div');
+      blank.className = 'cal-day blank';
+      calGrid.appendChild(blank);
+    }
+
+    const todayIso = todayStr();
+    for(let d=1; d<=daysInMonth; d++){
+      const iso = viewYear + '-' + String(viewMonth+1).padStart(2,'0') + '-' + String(d).padStart(2,'0');
+      const cell = document.createElement('div');
+      const hasWalks = !!map[iso];
+      cell.className = 'cal-day' + (hasWalks ? ' walked clickable' : '') + (iso === todayIso ? ' today' : '');
+      cell.innerHTML = d + (hasWalks ? '<span class="dot">🌸</span>' : '');
+      if(hasWalks){
+        cell.addEventListener('click', ()=>{
+          const list = map[iso];
+          const total = list.reduce((s,e)=>s+e.miles,0);
+          calInfo.textContent = formatDateShort(iso) + ': ' + total.toFixed(2) + ' mi (' + list.length + (list.length===1?' walk':' walks') + ') 💗';
+        });
+      }
+      calGrid.appendChild(cell);
+    }
+  }
+
+  prevMonthBtn.addEventListener('click', ()=>{
+    viewMonth--;
+    if(viewMonth < 0){ viewMonth = 11; viewYear--; }
+    renderCalendar();
+  });
+  nextMonthBtn.addEventListener('click', ()=>{
+    viewMonth++;
+    if(viewMonth > 11){ viewMonth = 0; viewYear++; }
+    renderCalendar();
+  });
+
+  // ---------- Render all ----------
+  function renderAll(){
+    renderGoalLabel();
+    renderTrail();
+    renderEntries();
+    renderCalendar();
+  }
+
+  window.addEventListener('resize', renderTrail);
+  renderAll();
+})();
+</script>
+</body>
+</html>
