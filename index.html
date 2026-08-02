@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -6,20 +7,281 @@
 <meta name="theme-color" content="#fff7fb">
 <title>The Walking Club 5K Tracker</title>
 <style>
-:root{--p:#e88ab4;--pd:#c95f91;--ps:#fff0f7;--r:#f7d7e5;--t:#40343b;--m:#8b7b84;--b:#f0dbe5;--w:#fff}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#fff7fb,#fff);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{max-width:760px;margin:auto;padding:14px}
-.card{background:var(--w);border:1px solid var(--b);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 8px 24px #80506a12}
-.brand{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--pd)}h1{font-size:29px;margin:7px 0}.sub{font-size:14px;color:var(--m);line-height:1.5}
-.row{display:flex;justify-content:space-between;align-items:end;margin-top:20px}.big{font-size:38px;font-weight:800}.muted{font-size:12px;color:var(--m)}.pct{font-weight:800;color:var(--pd)}
-.bar{height:14px;background:#f9e7ef;border-radius:99px;margin-top:12px;overflow:hidden}.fill{height:100%;width:0;background:linear-gradient(90deg,#e88ab4,#f2b5cf);border-radius:99px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}.stat{text-align:center;background:var(--ps);border:1px solid var(--b);border-radius:15px;padding:10px}.stat b{display:block;font-size:18px}.stat span{font-size:11px;color:var(--m)}
-.head{display:flex;justify-content:space-between;align-items:center;margin-bottom:11px}.head b{font-size:17px}.head span{font-size:11px;color:var(--m)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{margin-top:8px}input,select,button{width:100%;min-height:45px;border-radius:13px;font:inherit}input,select{border:1px solid var(--b);background:#fffafb;padding:0 11px;color:var(--t)}button{border:0;font-weight:750;cursor:pointer}.primary{background:var(--p);color:white}.secondary{background:var(--ps);color:var(--pd);border:1px solid var(--b)}
-.badges{display:grid;grid-template-columns:1fr 1fr;gap:8px}.badge{display:flex;align-items:center;gap:8px;padding:9px;border:1px solid var(--b);border-radius:15px;background:#fffafb}.icon{width:40px;height:40px;display:grid;place-items:center;border-radius:13px;background:var(--r);border:2px dashed #d98aac;font-size:20px}.badge strong{display:block;font-size:12px}.badge small{display:block;font-size:10px;color:var(--m)}.badge button{width:auto;min-height:30px;padding:0 8px;margin-left:auto;font-size:10px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.chip{padding:6px 9px;border-radius:99px;background:var(--ps);border:1px solid var(--b);font-size:11px}
-.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.dow{text-align:center;font-size:9px;color:var(--m)}.day{min-height:49px;text-align:center;border:1px solid var(--b);border-radius:11px;padding:5px 2px}.day.today{outline:2px solid var(--p)}.num{font-size:9px;color:var(--m)}.count{font-size:12px;font-weight:800;margin-top:5px}.h1{background:#fcebf3}.h2{background:#f8d6e5}.h3{background:#f2bad3}.h4{background:#e99abd}
-.entry{display:flex;justify-content:space-between;gap:8px;padding:10px;border:1px solid var(--b);border-radius:13px;background:#fffafb;margin-bottom:7px}.entry strong{font-size:12px}.entry small{display:block;font-size:10px;color:var(--m);margin-top:3px}.eb{font-size:11px;color:var(--m);display:flex;gap:4px;align-items:center}.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:9px}.empty{text-align:center;color:var(--m);font-size:12px;padding:10px}
-@media(max-width:560px){.grid,.badges{grid-template-columns:1fr}h1{font-size:26px}}
+:root{
+--p:#e88ab4;
+--pd:#c95f91;
+--ps:#fff0f7;
+--r:#f7d7e5;
+--t:#40343b;
+--m:#8b7b84;
+--b:#f0dbe5;
+--w:#fff
+}
+*{box-sizing:border-box}
+body{
+margin:0;
+background:linear-gradient(180deg,#fff7fb,#fff);
+color:var(--t);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+.app{
+max-width:760px;
+margin:auto;
+padding:14px
+}
+.card{
+background:var(--w);
+border:1px solid var(--b);
+border-radius:22px;
+padding:18px;
+margin-bottom:14px;
+box-shadow:0 8px 24px #80506a12
+}
+.brand{
+font-size:12px;
+font-weight:800;
+letter-spacing:.12em;
+text-transform:uppercase;
+color:var(--pd)
+}
+h1{
+font-size:29px;
+margin:7px 0
+}
+.sub{
+font-size:14px;
+color:var(--m);
+line-height:1.5
+}
+.row{
+display:flex;
+justify-content:space-between;
+align-items:end;
+margin-top:20px
+}
+.big{
+font-size:38px;
+font-weight:800
+}
+.muted{
+font-size:12px;
+color:var(--m)
+}
+.pct{
+font-weight:800;
+color:var(--pd)
+}
+.bar{
+height:14px;
+background:#f9e7ef;
+border-radius:99px;
+margin-top:12px;
+overflow:hidden
+}
+.fill{
+height:100%;
+width:0;
+background:linear-gradient(90deg,#e88ab4,#f2b5cf);
+border-radius:99px;
+transition:.3s
+}
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px;
+margin-top:12px
+}
+.stat{
+text-align:center;
+background:var(--ps);
+border:1px solid var(--b);
+border-radius:15px;
+padding:10px
+}
+.stat b{
+display:block;
+font-size:18px
+}
+.stat span{
+font-size:11px;
+color:var(--m)
+}
+.grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+.full{
+margin-top:8px
+}
+input,select,button{
+width:100%;
+min-height:45px;
+border-radius:13px;
+font:inherit
+}
+input,select{
+border:1px solid var(--b);
+background:#fffafb;
+padding:0 11px;
+color:var(--t)
+}
+button{
+border:0;
+font-weight:750;
+cursor:pointer
+}
+.primary{
+background:var(--p);
+color:white
+}
+.secondary{
+background:var(--ps);
+color:var(--pd);
+border:1px solid var(--b)
+}
+.badges{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px
+}
+.badge{
+display:flex;
+align-items:center;
+gap:8px;
+padding:9px;
+border:1px solid var(--b);
+border-radius:15px;
+background:#fffafb
+}
+.icon{
+width:40px;
+height:40px;
+display:grid;
+place-items:center;
+border-radius:13px;
+background:var(--r);
+border:2px dashed #d98aac;
+font-size:20px
+}
+.badge strong{
+display:block;
+font-size:12px
+}
+.badge small{
+display:block;
+font-size:10px;
+color:var(--m)
+}
+.badge button{
+width:auto;
+min-height:30px;
+padding:0 8px;
+margin-left:auto;
+font-size:10px
+}
+.chips{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin-top:10px
+}
+.chip{
+padding:6px 9px;
+border-radius:99px;
+background:var(--ps);
+border:1px solid var(--b);
+font-size:11px
+}
+.cal{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:4px
+}
+.dow{
+text-align:center;
+font-size:9px;
+color:var(--m)
+}
+.day{
+min-height:49px;
+text-align:center;
+border:1px solid var(--b);
+border-radius:11px;
+padding:5px 2px
+}
+.day.today{
+outline:2px solid var(--p)
+}
+.num{
+font-size:9px;
+color:var(--m)
+}
+.count{
+font-size:12px;
+font-weight:800;
+margin-top:5px
+}
+.h1{background:#fcebf3}
+.h2{background:#f8d6e5}
+.h3{background:#f2bad3}
+.h4{background:#e99abd}
+.entry{
+display:flex;
+justify-content:space-between;
+gap:8px;
+padding:10px;
+border:1px solid var(--b);
+border-radius:13px;
+background:#fffafb;
+margin-bottom:7px
+}
+.entry strong{
+font-size:12px
+}
+.entry small{
+display:block;
+font-size:10px;
+color:var(--m);
+margin-top:3px
+}
+.eb{
+font-size:11px;
+color:var(--m);
+display:flex;
+gap:4px;
+align-items:center
+}
+.actions{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin-top:9px
+}
+.empty{
+text-align:center;
+color:var(--m);
+font-size:12px;
+padding:10px
+}
+.complete{
+text-align:center;
+margin-top:12px;
+padding:10px;
+background:var(--ps);
+border-radius:14px;
+color:var(--pd);
+font-weight:800;
+display:none
+}
+@media(max-width:560px){
+.grid,.badges{
+grid-template-columns:1fr
+}
+h1{
+font-size:26px
+}
+}
 </style>
 </head>
 <body>
@@ -27,77 +289,459 @@
 <section class="card">
 <div class="brand">🌸 The Walking Club</div>
 <h1>Walk. Track. Earn your badges.</h1>
-<div class="sub">A simple, girly way to stay accountable to your 3,100-walk goal.</div>
-<div class="row"><div><div class="big" id="total">0</div><div class="muted">walks completed</div></div><div class="pct" id="pct">0%</div></div>
-<div class="bar"><div class="fill" id="fill"></div></div>
-<div class="stats"><div class="stat"><b id="remaining">3,100</b><span>remaining</span></div><div class="stat"><b id="best">0</b><span>best day</span></div><div class="stat"><b id="days">0</b><span>days walked</span></div></div>
+<div class="sub">
+Your goal: walk a 5K — that's <strong>3.10 miles</strong>.
+Every mile counts! 💕
+</div>
+<div class="row">
+<div>
+<div class="big" id="total">0.00</div>
+<div class="muted">miles completed</div>
+</div>
+<div class="pct" id="pct">0%</div>
+</div>
+<div class="bar">
+<div class="fill" id="fill"></div>
+</div>
+<div class="stats">
+<div class="stat">
+<b id="remaining">3.10</b>
+<span>miles remaining</span>
+</div>
+<div class="stat">
+<b id="best">0.00</b>
+<span>best day</span>
+</div>
+<div class="stat">
+<b id="days">0</b>
+<span>days walked</span>
+</div>
+</div>
+<div id="complete" class="complete">
+🎀 5K COMPLETE! You did it! 🌸🥾✨
+</div>
 </section>
-
 <section class="card">
-<div class="head"><b>🥾 Log a walk</b><span>Every walk counts!</span></div>
-<div class="grid"><input id="date" type="date"><input id="count" type="number" min="1" placeholder="Number of walks"></div>
-<div class="grid full"><select id="badge"></select><input id="note" maxlength="50" placeholder="Optional note"></div>
-<button id="add" class="primary full">Add Walk ✨</button>
+<div class="head">
+<b>🥾 Log a walk</b>
+<span>Every mile counts!</span>
+</div>
+<div class="grid">
+<input id="date" type="date">
+
+<input
+id=“miles”
+type=“number”
+min=“0.01”
+max=“50”
+step=“0.01”
+placeholder=“Miles walked”
+
+</div>
+<div class="grid full">
+
+<input
+id=“note”
+maxlength=“50”
+placeholder=“Optional note”
+
+</div>
+<button id="add" class="primary full">
+Add Miles ✨
+</button>
 </section>
-
 <section class="card">
-<div class="head"><b>🏅 Badge closet</b><span>Pick a badge</span></div>
+<div class="head">
+<b>🏅 Badge closet</b>
+<span>Pick a badge</span>
+</div>
 <div id="badges" class="badges"></div>
-<div class="head" style="margin-top:15px"><b>✨ Create your own</b><span>Make it yours</span></div>
-<div class="grid"><input id="emoji" maxlength="4" value="🌸"><input id="name" maxlength="24" placeholder="Badge name"></div>
-<button id="create" class="secondary full">Create Custom Badge</button>
+<div class="head" style="margin-top:15px">
+<b>✨ Create your own</b>
+<span>Make it yours</span>
+</div>
+<div class="grid">
+<input id="emoji" maxlength="4" value="🌸">
+
+<input
+id=“name”
+maxlength=“24”
+placeholder=“Badge name”
+
+</div>
+<button id="create" class="secondary full">
+Create Custom Badge
+</button>
 <div id="chips" class="chips"></div>
 </section>
-
 <section class="card">
-<div class="head"><b>📅 This month</b><span id="month"></span></div>
+<div class="head">
+<b>📅 This month</b>
+<span id="month"></span>
+</div>
 <div id="cal" class="cal"></div>
 </section>
-
 <section class="card">
-<div class="head"><b>💗 Recent walks</b><span>Latest 8</span></div>
+<div class="head">
+<b>💗 Recent walks</b>
+<span>Latest 8</span>
+</div>
 <div id="entries"></div>
-<div class="actions"><button id="share" class="secondary">Share Summary</button><button id="reset" class="secondary">Reset</button></div>
+<div class="actions">
+<button id="share" class="secondary">
+Share Summary
+</button>
+<button id="reset" class="secondary">
+Reset
+</button>
+</div>
 </section>
 </main>
-
 <script>
-(()=>{const GOAL=3100,KEY="walkingClubTrackerV1";
+(()=>{
+const GOAL=3.10;
+const KEY="walkingClub5KTrackerV2";
 const presets=[
-["trail","🥾","Trailblazer","Outdoor walk"],["kind","💗","Kindness","Walk for others"],["camp","⛺","Camp Star","Weekend outing"],["nature","🌿","Nature Friend","Park or trail"],["leader","🧭","Leader Steps","Lead the route"],["helper","🤝","Community Helper","Service day"],["star","✨","Starlight","Evening walk"],["sun","🌅","Sunrise Scout","Morning walk"],["strong","💪","Strong Steps","Big walk day"],["explore","🗺️","Explorer","New route"],["bloom","🌸","Bloom Badge","Steady progress"],["gold","🏅","Golden Goal","Milestone day"]
-].map(x=>({id:x[0],emoji:x[1],name:x[2],hint:x[3]}));
-const $=id=>document.getElementById(id),now=new Date(),pad=n=>String(n).padStart(2,"0"),today=`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
-let state=load();$("date").value=today;
-function load(){try{let x=JSON.parse(localStorage.getItem(KEY));if(x&&Array.isArray(x.entries)&&Array.isArray(x.custom))return x}catch(e){}return{entries:[],custom:[]}}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
-function all(){return presets.concat(state.custom)}
-function badge(id){return all().find(x=>x.id===id)}
-function total(){return state.entries.reduce((a,e)=>a+e.count,0)}
-function best(){let x={};state.entries.forEach(e=>x[e.date]=(x[e.date]||0)+e.count);return Math.max(0,...Object.values(x).map(Number))}
-function days(){return new Set(state.entries.map(e=>e.date)).size}
-function esc(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+["first","🌷","First Mile","Walk your first mile"],
+["two","🦋","2 Mile Butterfly","Reach 2 miles"],
+["5k","🎀","5K Finisher","Complete 3.10 miles"],
+["trail","🥾","Trailblazer","Outdoor walk"],
+["nature","🌿","Nature Friend","Park or trail"],
+["leader","🧭","Leader Steps","Lead the route"],
+["helper","🤝","Community Helper","Service day"],
+["star","✨","Starlight","Evening walk"],
+["sun","🌅","Sunrise Scout","Morning walk"],
+["strong","💪","Strong Steps","Big walk day"],
+["explore","🗺️","Explorer","New route"],
+["bloom","🌸","Bloom Badge","Steady progress"],
+["gold","🏅","Golden Goal","Milestone day"]
+].map(x=>({
+id:x[0],
+emoji:x[1],
+name:x[2],
+hint:x[3]
+}));
+const $=id=>document.getElementById(id);
+const now=new Date();
+const pad=n=>String(n).padStart(2,"0");
+const today=
+`${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}`;
+let state=load();
+$("date").value=today;
+function load(){
+try{
+let x=JSON.parse(
+localStorage.getItem(KEY)
+);
+if(
+x &&
+Array.isArray(x.entries) &&
+Array.isArray(x.custom)
+)return x;
+}catch(e){}
+return{
+entries:[],
+custom:[]
+};
+}
+function save(){
+try{
+localStorage.setItem(
+KEY,
+JSON.stringify(state)
+);
+}catch(e){}
+}
+function all(){
+return presets.concat(state.custom);
+}
+function badge(id){
+return all().find(x=>x.id===id);
+}
+function total(){
+return state.entries.reduce(
+(a,e)=>a+Number(e.miles),
+0
+);
+}
+function dailyTotals(){
+let x={};
+state.entries.forEach(e=>{
+x[e.date]=
+(x[e.date]||0)+
+Number(e.miles);
+});
+return x;
+}
+function best(){
+let x=dailyTotals();
+return Math.max(
+0,
+...Object.values(x).map(Number)
+);
+}
+function days(){
+return new Set(
+state.entries.map(e=>e.date)
+).size;
+}
+function esc(x){
+return String(x??"")
+.replace(/[&<>"']/g,m=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m]));
+}
 function render(){
-let t=total(),p=Math.min(100,Math.round(t/GOAL*100));$("total").textContent=t.toLocaleString();$("remaining").textContent=Math.max(0,GOAL-t).toLocaleString();$("best").textContent=best();$("days").textContent=days();$("pct").textContent=p+"%";$("fill").style.width=p+"%";
-let sel=$("badge"),old=sel.value;sel.innerHTML='<option value="">No badge</option>'+all().map(b=>`<option value="${esc(b.id)}">${esc(b.emoji)} ${esc(b.name)}</option>`).join("");if(badge(old))sel.value=old;
-$("badges").innerHTML=all().map(b=>`<div class="badge"><div class="icon">${esc(b.emoji)}</div><div><strong>${esc(b.name)}</strong><small>${esc(b.hint)}</small></div><button class="secondary" data-use="${esc(b.id)}">Use</button></div>`).join("");
-document.querySelectorAll("[data-use]").forEach(x=>x.onclick=()=>{$("badge").value=x.dataset.use});
-$("chips").innerHTML=state.custom.map(b=>`<span class="chip">${esc(b.emoji)} ${esc(b.name)}</span>`).join("");
-renderCal();renderEntries()
+let t=total();
+let p=Math.min(
+100,
+Math.round((t/GOAL)*100)
+);
+$("total").textContent=t.toFixed(2);
+$("remaining").textContent=
+Math.max(0,GOAL-t).toFixed(2);
+$("best").textContent=
+best().toFixed(2);
+$("days").textContent=days();
+$("pct").textContent=p+"%";
+$("fill").style.width=p+"%";
+$("complete").style.display=
+t>=GOAL?"block":"none";
+let sel=$("badge");
+let old=sel.value;
+sel.innerHTML=
+'<option value="">No badge</option>'+
+all().map(b=>
+`<option value="${esc(b.id)}">
+${esc(b.emoji)} ${esc(b.name)}
+</option>`
+).join("");
+if(badge(old))
+sel.value=old;
+$("badges").innerHTML=
+all().map(b=>
+`<div class="badge">
+<div class="icon">
+${esc(b.emoji)}
+</div>
+<div>
+<strong>${esc(b.name)}</strong>
+<small>${esc(b.hint)}</small>
+</div>
+<button
+class="secondary"
+data-use="${esc(b.id)}">
+Use
+</button>
+</div>`
+).join("");
+document
+.querySelectorAll("[data-use]")
+.forEach(x=>{
+x.onclick=()=>{
+$("badge").value=x.dataset.use;
+};
+});
+$("chips").innerHTML=
+state.custom.map(b=>
+`<span class="chip">
+${esc(b.emoji)} ${esc(b.name)}
+</span>`
+).join("");
+renderCal();
+renderEntries();
 }
 function renderCal(){
-let y=now.getFullYear(),m=now.getMonth(),n=new Date(y,m+1,0).getDate(),first=new Date(y,m,1).getDay(),s=Array(n).fill(0);state.entries.forEach(e=>{let d=new Date(e.date+"T00:00:00");if(d.getFullYear()==y&&d.getMonth()==m)s[d.getDate()-1]+=e.count});
-$("month").textContent=now.toLocaleDateString(undefined,{month:"long",year:"numeric"});let h=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="dow">${x}</div>`).join("");for(let i=0;i<first;i++)h+="<div></div>";
-for(let i=1;i<=n;i++){let v=s[i-1],c=v<1?"":v<25?"h1":v<75?"h2":v<150?"h3":"h4",key=`${y}-${pad(m+1)}-${pad(i)}`;h+=`<div class="day ${c} ${key===today?"today":""}"><div class="num">${i}</div><div class="count">${v||"—"}</div></div>`}$("cal").innerHTML=h
+let y=now.getFullYear();
+let m=now.getMonth();
+let n=
+new Date(y,m+1,0).getDate();
+let first=
+new Date(y,m,1).getDay();
+let totals=Array(n).fill(0);
+state.entries.forEach(e=>{
+let d=
+new Date(e.date+"T00:00:00");
+if(
+d.getFullYear()==y &&
+d.getMonth()==m
+){
+totals[d.getDate()-1]+=
+Number(e.miles);
+}
+});
+$("month").textContent=
+now.toLocaleDateString(
+undefined,
+{
+month:"long",
+year:"numeric"
+}
+);
+let h=
+["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+.map(x=>`<div class="dow">${x}</div>`)
+.join("");
+for(let i=0;i<first;i++)
+h+="<div></div>";
+for(let i=1;i<=n;i++){
+let v=totals[i-1];
+let c=
+v<.01?"":
+v<.5?"h1":
+v<1?"h2":
+v<2?"h3":
+"h4";
+let key=
+`${y}-${pad(m+1)}-${pad(i)}`;
+h+=`
+<div class="day ${c} ${key===today?"today":""}">
+<div class="num">${i}</div>
+<div class="count">
+${v?v.toFixed(2):"—"}
+</div>
+</div>
+`;
+}
+$("cal").innerHTML=h;
 }
 function renderEntries(){
-let a=[...state.entries].sort((x,y)=>y.date.localeCompare(x.date)||(y.createdAt||0)-(x.createdAt||0)).slice(0,8);
-$("entries").innerHTML=a.length?a.map(e=>{let b=badge(e.badgeId),d=new Date(e.date+"T00:00:00").toLocaleDateString(undefined,{month:"short",day:"numeric",year:"numeric"});return`<div class="entry"><div><strong>${e.count} ${e.count==1?"walk":"walks"}</strong><small>${d}${e.note?" · "+esc(e.note):""}</small></div><div class="eb">${b?esc(b.emoji)+" "+esc(b.name):""}</div></div>`}).join(""):'<div class="empty">No walks yet. Add your first one above! 🌸</div>'
+let a=
+[...state.entries]
+.sort(
+(x,y)=>
+y.date.localeCompare(x.date)||
+(y.createdAt||0)-(x.createdAt||0)
+)
+.slice(0,8);
+$("entries").innerHTML=
+a.length?
+a.map(e=>{
+let b=badge(e.badgeId);
+let d=
+new Date(e.date+"T00:00:00")
+.toLocaleDateString(
+undefined,
+{
+month:"short",
+day:"numeric",
+year:"numeric"
 }
-$("add").onclick=()=>{let date=$("date").value,count=parseInt($("count").value,10);if(!date||!count||count<1)return alert("Please enter a date and number of walks.");state.entries.push({date,count,badgeId:$("badge").value,note:$("note").value.trim(),createdAt:Date.now()});$("count").value="";$("note").value="";save();render()};
-$("create").onclick=()=>{let name=$("name").value.trim();if(!name)return alert("Please enter a badge name.");let b={id:"custom-"+Date.now(),emoji:$("emoji").value.trim()||"🌸",name,hint:"My custom badge"};state.custom.push(b);$("name").value="";save();render();$("badge").value=b.id};
-$("share").onclick=async()=>{let text=`🌸 The Walking Club — ${total().toLocaleString()} of ${GOAL.toLocaleString()} walks complete! ${Math.max(0,GOAL-total()).toLocaleString()} remaining. Best day: ${best()}.`;if(navigator.share){try{await navigator.share({title:"The Walking Club",text})}catch(e){}}else{try{await navigator.clipboard.writeText(text);alert("Summary copied!")}catch(e){prompt("Copy your summary:",text)}}};
-$("reset").onclick=()=>{if(confirm("Reset all walks and custom badges?")){state={entries:[],custom:[]};save();render()}};
-render()})();
+);
+return`
+<div class="entry">
+<div>
+<strong>
+${Number(e.miles).toFixed(2)}
+${Number(e.miles)==1?"mile":"miles"}
+</strong>
+<small>
+${d}
+${e.note?" · "+esc(e.note):""}
+</small>
+</div>
+<div class="eb">
+${b?
+esc(b.emoji)+" "+esc(b.name):
+""}
+</div>
+</div>
+`;
+}).join("")
+:
+'<div class="empty">No walks yet. Add your first mile above! 🌸</div>';
+}
+$("add").onclick=()=>{
+let date=$("date").value;
+let miles=
+parseFloat($("miles").value);
+if(
+!date||
+!miles||
+miles<=0
+){
+return alert(
+"Please enter a date and miles walked."
+);
+}
+state.entries.push({
+date,
+miles,
+badgeId:$("badge").value,
+note:$("note").value.trim(),
+createdAt:Date.now()
+});
+$("miles").value="";
+$("note").value="";
+save();
+render();
+};
+$("create").onclick=()=>{
+let name=
+$("name").value.trim();
+if(!name)
+return alert(
+"Please enter a badge name."
+);
+let b={
+id:"custom-"+Date.now(),
+emoji:$("emoji").value.trim()||"🌸",
+name,
+hint:"My custom badge"
+};
+state.custom.push(b);
+$("name").value="";
+save();
+render();
+$("badge").value=b.id;
+};
+$("share").onclick=async()=>{
+let t=total();
+let text=
+`🌸 The Walking Club 5K 🌸
+I've walked ${t.toFixed(2)} of 3.10 miles!
+${Math.max(0,GOAL-t).toFixed(2)} miles to go.
+Best day: ${best().toFixed(2)} miles.
+🥾💕 #TheWalkingClub #5K`;
+if(navigator.share){
+try{
+await navigator.share({
+title:"The Walking Club 5K",
+text
+});
+}catch(e){}
+}else{
+try{
+await navigator.clipboard.writeText(text);
+alert("Summary copied!");
+}catch(e){
+prompt(
+"Copy your summary:",
+text
+);
+}
+}
+};
+$("reset").onclick=()=>{
+if(
+confirm(
+"Reset all 5K progress and custom badges?"
+)
+){
+state={
+entries:[],
+custom:[]
+};
+save();
+render();
+}
+};
+render();
+})();
 </script>
 </body>
 </html>
